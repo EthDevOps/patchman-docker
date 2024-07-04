@@ -12,6 +12,8 @@ ENV APACHE_LOG_DIR /var/log/apache2
 
 # Expose port 80 to access Apache
 EXPOSE 80
-
+COPY ./run.sh /run.sh
+COPY ./patchman.conf /etc/apache2/conf-available/patchman.conf
+RUN chmod +x /run.sh
 # Use a basecommand to initialize and run Apache in the foreground
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+CMD ["bash", "/run.sh"]
